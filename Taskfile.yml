@@ -1,0 +1,97 @@
+version: "3"
+
+vars:
+    PROTO_ROOT: .
+    DOCKER_IMAGE: proto-builder
+
+tasks:
+    docker-build:
+        desc: "Собрать Docker образ с protoc"
+        cmds:
+            - docker build -t {{.DOCKER_IMAGE}} .
+
+    gen:
+        desc: "Сгенерировать Go код из .proto файлов"
+        deps:
+            - docker-build
+        cmds:
+            - |
+                docker run --rm -v {{.PROTO_ROOT | absPath}}:/app {{.DOCKER_IMAGE}} bash -c '
+                set -e;
+                for dir in account pagination; do
+                  echo "» Processing $$dir";
+                  mkdir -p /app/$$dir/go;
+                  cd /app/$$dir;
+                  for file in *.proto; do
+                    echo "Generating $$dir/$$file";
+                    protoc \
+                      -I /app \
+                      -I /usr/local/include/googleapis \
+                      --go_out=go \
+                      --go_opt=paths=source_relative \
+                      --go-grpc_out=go \
+                      --go-grpc_opt=paths=source_relative \
+                      $$file;
+                  done;
+                done
+                '
+
+    clean:
+        desc: "Удалить сгенерированные Go файлы"
+        cmds:
+            - rm -rf account/go pagination/go
+
+    # Альтернативная версия с локальным protoc (без Docker)
+    gen-local:
+        desc: "Сгенерировать код локально (требуется protoc)"
+        cmds:
+            - |
+                for dir in account pagination; do
+                  echo "» Processing $$dir";
+                  mkdir -p $$dir/go;
+                  cd $$dir;
+                  for file in *.proto; do
+                    echo "Generating $$dir/$$file";
+                    protoc \
+                      -I . \
+                      -I /usr/local/include/googleapis \
+                      --go_out=go \
+                      --go_opt=paths=source_relative \
+                      --go-grpc_out=go \
+                      --go-grpc_opt=paths=source_relative \
+                      $$file;
+                  done;
+                  cd ..;
+                done
+
+    # Полная пересборка (clean + gen)
+    rebuild:
+        desc: "Полная пересборка (очистка + генерация)"
+        cmds:
+            - task: clean
+            - task: gen
+
+    # Сгенерировать для одной конкретной директории
+    gen-account:
+        desc: "Сгенерировать только account"
+        cmds:
+            - |
+                docker run --rm -v {{.PROTO_ROOT | absPath}}:/app {{.DOCKER_IMAGE}} bash -c '
+                cd /app/account;
+                mkdir -p go;
+                for file in *.proto; do
+                  protoc -I /app -I /usr/local/include/googleapis --go_out=go --go_opt=paths=source_relative --go-grpc_out=go --go-grpc_opt=paths=source_relative $$file;
+                done
+                '
+
+    gen-pagination:
+        desc: "Сгенерировать только pagination"
+        cmds:
+            - |
+                docker run --rm -v {{.PROTO_ROOT | absPath}}:/app {{.DOCKER_IMAGE}} bash -c '
+                cd /app/pagination;
+                mkdir -p go;
+                for file in *.proto; do
+                  protoc -I /app -I /usr/local/include/googleapis --go_out=go --go_opt=paths=source_relative --go-grpc_out=go --go-grpc_opt=paths=source_relative $$file;
+                done
+                '
