@@ -13,6 +13,7 @@ message CreateUser {
 	string middle_name = 5;
 	string email = 6;
 	uint32 age = 7;
+	string password = 8;
 }
 
 message User {
