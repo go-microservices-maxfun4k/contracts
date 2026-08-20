@@ -261,7 +261,7 @@ const file_account_account_model_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBMZKgithub.com/MaxFun4k1/go-microservices-maxfun4k/contracts/go/account;accountb\x06proto3"
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBCZAgithub.com/go-microservices-maxfun4k/contracts/go/account;accountb\x06proto3"
 
 var (
 	file_account_account_model_proto_rawDescOnce sync.Once
