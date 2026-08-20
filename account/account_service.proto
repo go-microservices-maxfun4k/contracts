@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package account;
-option go_package = "github.com/MaxFun4k1/go-microservices-maxfun4k/contracts/go/account;account";
+option go_package = "github.com/go-microservices-maxfun4k/contracts/go/account;account";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
