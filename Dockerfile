@@ -1,4 +1,4 @@
-FROM golang:1.24
+FROM golang:1.26
 
 # Устанавливаем protoc
 ARG PROTOC_VERSION=27.1

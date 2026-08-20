@@ -16,24 +16,18 @@ tasks:
             - docker-build
         cmds:
             - |
-                docker run --rm -v {{.PROTO_ROOT | absPath}}:/app {{.DOCKER_IMAGE}} bash -c '
+                docker run --rm -v {{.PROTO_ROOT | absPath | replace "\\" "/"}}:/app {{.DOCKER_IMAGE}} bash -c '
                 set -e;
-                for dir in account pagination; do
-                  echo "» Processing $$dir";
-                  mkdir -p /app/$$dir/go;
-                  cd /app/$$dir;
-                  for file in *.proto; do
-                    echo "Generating $$dir/$$file";
-                    protoc \
-                      -I /app \
-                      -I /usr/local/include/googleapis \
-                      --go_out=go \
-                      --go_opt=paths=source_relative \
-                      --go-grpc_out=go \
-                      --go-grpc_opt=paths=source_relative \
-                      $$file;
-                  done;
-                done
+                cd /app;
+                mkdir -p go;
+                protoc \
+                  -I /app \
+                  -I /usr/local/include/googleapis \
+                  --go_out=go \
+                  --go_opt=paths=source_relative \
+                  --go-grpc_out=go \
+                  --go-grpc_opt=paths=source_relative \
+                  account/*.proto pagination/*.proto
                 '
 
     clean:
@@ -47,11 +41,11 @@ tasks:
         cmds:
             - |
                 for dir in account pagination; do
-                  echo "» Processing $$dir";
-                  mkdir -p $$dir/go;
-                  cd $$dir;
+                  echo "» Processing \$dir";
+                  mkdir -p \$dir/go;
+                  cd \$dir;
                   for file in *.proto; do
-                    echo "Generating $$dir/$$file";
+                    echo "Generating \$dir/\$file";
                     protoc \
                       -I . \
                       -I /usr/local/include/googleapis \
@@ -59,7 +53,7 @@ tasks:
                       --go_opt=paths=source_relative \
                       --go-grpc_out=go \
                       --go-grpc_opt=paths=source_relative \
-                      $$file;
+                      \$file;
                   done;
                   cd ..;
                 done
@@ -76,11 +70,11 @@ tasks:
         desc: "Сгенерировать только account"
         cmds:
             - |
-                docker run --rm -v {{.PROTO_ROOT | absPath}}:/app {{.DOCKER_IMAGE}} bash -c '
+                docker run --rm -v {{.PROTO_ROOT | absPath | replace "\\" "/"}}:/app {{.DOCKER_IMAGE}} bash -c '
                 cd /app/account;
                 mkdir -p go;
                 for file in *.proto; do
-                  protoc -I /app -I /usr/local/include/googleapis --go_out=go --go_opt=paths=source_relative --go-grpc_out=go --go-grpc_opt=paths=source_relative $$file;
+                  protoc -I /app -I /usr/local/include/googleapis --go_out=go --go_opt=paths=source_relative --go-grpc_out=go --go-grpc_opt=paths=source_relative \$file;
                 done
                 '
 
@@ -88,10 +82,10 @@ tasks:
         desc: "Сгенерировать только pagination"
         cmds:
             - |
-                docker run --rm -v {{.PROTO_ROOT | absPath}}:/app {{.DOCKER_IMAGE}} bash -c '
+                docker run --rm -v {{.PROTO_ROOT | absPath | replace "\\" "/"}}:/app {{.DOCKER_IMAGE}} bash -c '
                 cd /app/pagination;
                 mkdir -p go;
                 for file in *.proto; do
-                  protoc -I /app -I /usr/local/include/googleapis --go_out=go --go_opt=paths=source_relative --go-grpc_out=go --go-grpc_opt=paths=source_relative $$file;
+                  protoc -I /app -I /usr/local/include/googleapis --go_out=go --go_opt=paths=source_relative --go-grpc_out=go --go-grpc_opt=paths=source_relative \$file;
                 done
                 '

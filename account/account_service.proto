@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package account;
 // Может быть нужно будет переименовать
-option go_package = "github.com/MaxFun4k1/go_microservices/contracts/account/go;account";
+option go_package = "github.com/MaxFun4k1/go_microservices/go-microservices-maxfun4k/contracts/go/account;account";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
-import "account_model.proto";
+import "account/account_model.proto";
 import "pagination/pagination.proto"; 
 
 service Account {
@@ -71,5 +71,5 @@ message DeleteUserRequest {
 
 message UpdateUserRequest {
 	uint64 user_id = 1;
-	User user = 2
+	User user = 2;
 }
