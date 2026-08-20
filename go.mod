@@ -1,4 +1,4 @@
-module github.com/MaxFun4k1/go_microservices/contracts
+module github.com/MaxFun4k1/go-microservices-maxfun4k/contracts
 
 go 1.26.3
 

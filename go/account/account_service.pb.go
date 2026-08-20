@@ -7,7 +7,7 @@
 package account
 
 import (
-	pagination "github.com/MaxFun4k1/go_microservices/contracts/go/pagination"
+	pagination "github.com/MaxFun4k1/go-microservices-maxfun4k/contracts/go/pagination"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -381,7 +381,7 @@ const file_account_account_service_proto_rawDesc = "" +
 	"\n" +
 	"DeleteUser\x12\x1a.account.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"&\x82\xd3\xe4\x93\x02 *\x1eaccount/api/v1/users/{user_id}\x12k\n" +
 	"\n" +
-	"UpdateUser\x12\x1a.account.UpdateUserRequest\x1a\x16.google.protobuf.Empty\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1eaccount/api/v1/users/{user_id}BDZBgithub.com/MaxFun4k1/go_microservices/contracts/go/account;accountb\x06proto3"
+	"UpdateUser\x12\x1a.account.UpdateUserRequest\x1a\x16.google.protobuf.Empty\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1eaccount/api/v1/users/{user_id}BMZKgithub.com/MaxFun4k1/go-microservices-maxfun4k/contracts/go/account;accountb\x06proto3"
 
 var (
 	file_account_account_service_proto_rawDescOnce sync.Once

@@ -1,8 +1,7 @@
 syntax = "proto3";
 
 package account;
-// Может быть нужно будет переименовать
-option go_package = "github.com/MaxFun4k1/go_microservices/go-microservices-maxfun4k/contracts/go/account;account";
+option go_package = "github.com/MaxFun4k1/go-microservices-maxfun4k/contracts/go/account;account";
 
 import "google/protobuf/timestamp.proto";
 
