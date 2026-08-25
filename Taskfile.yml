@@ -27,7 +27,7 @@ tasks:
                   --go_opt=paths=source_relative \
                   --go-grpc_out=go \
                   --go-grpc_opt=paths=source_relative \
-                  account/*.proto pagination/*.proto
+                  account/*.proto pagination/*.proto auth/*.proto
                 '
 
     clean:
