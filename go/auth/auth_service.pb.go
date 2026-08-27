@@ -478,11 +478,11 @@ const file_auth_auth_service_proto_rawDesc = "" +
 	"token_pair\x18\x01 \x01(\v2\x0f.auth.TokenPairR\ttokenPair\"A\n" +
 	"\x0fRefreshResponse\x12.\n" +
 	"\n" +
-	"token_pair\x18\x01 \x01(\v2\x0f.auth.TokenPairR\ttokenPair2\xd2\x02\n" +
+	"token_pair\x18\x01 \x01(\v2\x0f.auth.TokenPairR\ttokenPair2\xd8\x02\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.google.protobuf.Empty\x120\n" +
-	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x120\n" +
-	"\aRefresh\x12\x14.auth.RefreshRequest\x1a\x0f.auth.TokenPair\x129\n" +
+	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
+	"\aRefresh\x12\x14.auth.RefreshRequest\x1a\x15.auth.RefreshResponse\x129\n" +
 	"\bValidate\x12\x15.auth.ValidateRequest\x1a\x16.auth.ValidateResponse\x125\n" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x16.google.protobuf.Empty\x129\n" +
 	"\n" +
@@ -525,7 +525,7 @@ var file_auth_auth_service_proto_depIdxs = []int32{
 	1,  // 7: auth.Auth.DeleteUser:input_type -> auth.DeleteRequest
 	10, // 8: auth.Auth.Register:output_type -> google.protobuf.Empty
 	7,  // 9: auth.Auth.Login:output_type -> auth.LoginResponse
-	9,  // 10: auth.Auth.Refresh:output_type -> auth.TokenPair
+	8,  // 10: auth.Auth.Refresh:output_type -> auth.RefreshResponse
 	6,  // 11: auth.Auth.Validate:output_type -> auth.ValidateResponse
 	10, // 12: auth.Auth.Logout:output_type -> google.protobuf.Empty
 	10, // 13: auth.Auth.DeleteUser:output_type -> google.protobuf.Empty
