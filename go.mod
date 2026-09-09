@@ -1,6 +1,6 @@
 module github.com/go-microservices-maxfun4k/contracts
 
-go 1.26.1
+go 1.27.0
 
 require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20260819154853-08b0e4226688
