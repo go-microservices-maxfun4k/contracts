@@ -10,10 +10,12 @@ import (
 	account "github.com/go-microservices-maxfun4k/contracts/go/account"
 	auth "github.com/go-microservices-maxfun4k/contracts/go/auth"
 	pagination "github.com/go-microservices-maxfun4k/contracts/go/pagination"
+	transaction "github.com/go-microservices-maxfun4k/contracts/go/transaction"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -876,11 +878,304 @@ func (x *RefreshResponse) GetTokenPair() *auth.TokenPair {
 	return nil
 }
 
+// Запросы для транзакций
+type DepositRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        uint64                 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DepositRequest) Reset() {
+	*x = DepositRequest{}
+	mi := &file_gateway_gateway_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DepositRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DepositRequest) ProtoMessage() {}
+
+func (x *DepositRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gateway_gateway_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DepositRequest.ProtoReflect.Descriptor instead.
+func (*DepositRequest) Descriptor() ([]byte, []int) {
+	return file_gateway_gateway_service_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *DepositRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *DepositRequest) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type WithdrawRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        uint64                 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WithdrawRequest) Reset() {
+	*x = WithdrawRequest{}
+	mi := &file_gateway_gateway_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WithdrawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WithdrawRequest) ProtoMessage() {}
+
+func (x *WithdrawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gateway_gateway_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WithdrawRequest.ProtoReflect.Descriptor instead.
+func (*WithdrawRequest) Descriptor() ([]byte, []int) {
+	return file_gateway_gateway_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *WithdrawRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *WithdrawRequest) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type TransferRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        uint64                 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Recipient     uint64                 `protobuf:"varint,3,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferRequest) Reset() {
+	*x = TransferRequest{}
+	mi := &file_gateway_gateway_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferRequest) ProtoMessage() {}
+
+func (x *TransferRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gateway_gateway_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferRequest.ProtoReflect.Descriptor instead.
+func (*TransferRequest) Descriptor() ([]byte, []int) {
+	return file_gateway_gateway_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *TransferRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *TransferRequest) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *TransferRequest) GetRecipient() uint64 {
+	if x != nil {
+		return x.Recipient
+	}
+	return 0
+}
+
+type GetTransactionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        *uint64                `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Type          *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	DateFrom      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=date_from,json=dateFrom,proto3,oneof" json:"date_from,omitempty"` // фильтр по дате от
+	DateTo        *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=date_to,json=dateTo,proto3,oneof" json:"date_to,omitempty"`       // фильтр по дата до
+	Pagination    *pagination.Pagination `protobuf:"bytes,6,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransactionsRequest) Reset() {
+	*x = GetTransactionsRequest{}
+	mi := &file_gateway_gateway_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransactionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransactionsRequest) ProtoMessage() {}
+
+func (x *GetTransactionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gateway_gateway_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransactionsRequest.ProtoReflect.Descriptor instead.
+func (*GetTransactionsRequest) Descriptor() ([]byte, []int) {
+	return file_gateway_gateway_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetTransactionsRequest) GetUserId() uint64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *GetTransactionsRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *GetTransactionsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *GetTransactionsRequest) GetDateFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DateFrom
+	}
+	return nil
+}
+
+func (x *GetTransactionsRequest) GetDateTo() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DateTo
+	}
+	return nil
+}
+
+func (x *GetTransactionsRequest) GetPagination() *pagination.Pagination {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type GetTransactionsResponse struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Transactions  []*transaction.TransactionDetails `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransactionsResponse) Reset() {
+	*x = GetTransactionsResponse{}
+	mi := &file_gateway_gateway_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransactionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransactionsResponse) ProtoMessage() {}
+
+func (x *GetTransactionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gateway_gateway_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransactionsResponse.ProtoReflect.Descriptor instead.
+func (*GetTransactionsResponse) Descriptor() ([]byte, []int) {
+	return file_gateway_gateway_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetTransactionsResponse) GetTransactions() []*transaction.TransactionDetails {
+	if x != nil {
+		return x.Transactions
+	}
+	return nil
+}
+
 var File_gateway_gateway_service_proto protoreflect.FileDescriptor
 
 const file_gateway_gateway_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dgateway/gateway_service.proto\x12\agateway\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1bpagination/pagination.proto\x1a\x1baccount/account_model.proto\x1a\x15auth/auth_model.proto\"P\n" +
+	"\x1dgateway/gateway_service.proto\x12\agateway\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bpagination/pagination.proto\x1a\x1baccount/account_model.proto\x1a\x15auth/auth_model.proto\x1a#transaction/transaction_model.proto\"P\n" +
 	"\x0fRegisterRequest\x12!\n" +
 	"\x04user\x18\x01 \x01(\v2\r.account.UserR\x04user\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"^\n" +
@@ -928,10 +1223,41 @@ const file_gateway_gateway_service_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\"A\n" +
 	"\x0fRefreshResponse\x12.\n" +
 	"\n" +
-	"token_pair\x18\x01 \x01(\v2\x0f.auth.TokenPairR\ttokenPair2\xbf\b\n" +
+	"token_pair\x18\x01 \x01(\v2\x0f.auth.TokenPairR\ttokenPair\"A\n" +
+	"\x0eDepositRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x04R\x06amount\"B\n" +
+	"\x0fWithdrawRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x04R\x06amount\"`\n" +
+	"\x0fTransferRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x04R\x06amount\x12\x1c\n" +
+	"\trecipient\x18\x03 \x01(\x04R\trecipient\"\xea\x02\n" +
+	"\x16GetTransactionsRequest\x12\x1c\n" +
+	"\auser_id\x18\x01 \x01(\x04H\x00R\x06userId\x88\x01\x01\x12\x17\n" +
+	"\x04type\x18\x02 \x01(\tH\x01R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x02R\x06status\x88\x01\x01\x12<\n" +
+	"\tdate_from\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\bdateFrom\x88\x01\x01\x128\n" +
+	"\adate_to\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\x06dateTo\x88\x01\x01\x12;\n" +
+	"\n" +
+	"pagination\x18\x06 \x01(\v2\x16.pagination.PaginationH\x05R\n" +
+	"pagination\x88\x01\x01B\n" +
+	"\n" +
+	"\b_user_idB\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\f\n" +
+	"\n" +
+	"_date_fromB\n" +
+	"\n" +
+	"\b_date_toB\r\n" +
+	"\v_pagination\"^\n" +
+	"\x17GetTransactionsResponse\x12C\n" +
+	"\ftransactions\x18\x01 \x03(\v2\x1f.transaction.TransactionDetailsR\ftransactions2\xa4\r\n" +
 	"\aGateway\x12a\n" +
-	"\bRegister\x12\x18.gateway.RegisterRequest\x1a\x19.gateway.RegisterResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/auth/register\x12W\n" +
-	"\x05Login\x12\x15.gateway.LoginRequest\x1a\x18.gateway.RefreshResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/auth/login\x12X\n" +
+	"\bRegister\x12\x18.gateway.RegisterRequest\x1a\x19.gateway.RegisterResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/auth/register\x12U\n" +
+	"\x05Login\x12\x15.gateway.LoginRequest\x1a\x16.gateway.LoginResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/auth/login\x12]\n" +
+	"\aRefresh\x12\x17.gateway.RefreshRequest\x1a\x18.gateway.RefreshResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/auth/refresh\x12X\n" +
 	"\x06Logout\x12\x16.gateway.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/v1/auth/logour\x12p\n" +
 	"\rValidateToken\x12\x1d.gateway.ValidateTokenRequest\x1a\x1e.gateway.ValidateTokenResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/auth/validate\x12Z\n" +
 	"\n" +
@@ -943,7 +1269,12 @@ const file_gateway_gateway_service_proto_rawDesc = "" +
 	"UpdateUser\x12\x1a.gateway.UpdateUserRequest\x1a\x16.google.protobuf.Empty\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\x1a\x17/api/v1/users/{user_id}\x12k\n" +
 	"\x11UpdateCurrentUser\x12!.gateway.UpdateCurrentUserRequest\x1a\x16.google.protobuf.Empty\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/api/v1/users/me\x12a\n" +
 	"\n" +
-	"DeleteUser\x12\x1a.gateway.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x1f\x82\xd3\xe4\x93\x02\x19*\x17/api/v1/users/{user_id}BCZAgithub.com/go-microservices-maxfun4k/contracts/go/gateway;gatewayb\x06proto3"
+	"DeleteUser\x12\x1a.gateway.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x1f\x82\xd3\xe4\x93\x02\x19*\x17/api/v1/users/{user_id}\x12]\n" +
+	"\x11DeleteCurrentUser\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\x18\x82\xd3\xe4\x93\x02\x12*\x10/api/v1/users/me\x12c\n" +
+	"\aDeposit\x12\x17.gateway.DepositRequest\x1a\x16.google.protobuf.Empty\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/v1/transactions/deposit\x12f\n" +
+	"\bWithdraw\x12\x18.gateway.WithdrawRequest\x1a\x16.google.protobuf.Empty\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/v1/transactions/withdraw\x12f\n" +
+	"\bTransfer\x12\x18.gateway.TransferRequest\x1a\x16.google.protobuf.Empty\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/v1/transactions/transfer\x12r\n" +
+	"\x0fGetTransactions\x12\x1f.gateway.GetTransactionsRequest\x1a .gateway.GetTransactionsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/transactionsBCZAgithub.com/go-microservices-maxfun4k/contracts/go/gateway;gatewayb\x06proto3"
 
 var (
 	file_gateway_gateway_service_proto_rawDescOnce sync.Once
@@ -957,74 +1288,97 @@ func file_gateway_gateway_service_proto_rawDescGZIP() []byte {
 	return file_gateway_gateway_service_proto_rawDescData
 }
 
-var file_gateway_gateway_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_gateway_gateway_service_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_gateway_gateway_service_proto_goTypes = []any{
-	(*RegisterRequest)(nil),          // 0: gateway.RegisterRequest
-	(*RegisterResponse)(nil),         // 1: gateway.RegisterResponse
-	(*LoginRequest)(nil),             // 2: gateway.LoginRequest
-	(*LoginResponse)(nil),            // 3: gateway.LoginResponse
-	(*RefreshRequest)(nil),           // 4: gateway.RefreshRequest
-	(*LogoutRequest)(nil),            // 5: gateway.LogoutRequest
-	(*ValidateTokenRequest)(nil),     // 6: gateway.ValidateTokenRequest
-	(*ValidateTokenResponse)(nil),    // 7: gateway.ValidateTokenResponse
-	(*CreateUserRequest)(nil),        // 8: gateway.CreateUserRequest
-	(*GetUserRequest)(nil),           // 9: gateway.GetUserRequest
-	(*GetUserResponse)(nil),          // 10: gateway.GetUserResponse
-	(*GetCurrentUserResponse)(nil),   // 11: gateway.GetCurrentUserResponse
-	(*GetUsersRequest)(nil),          // 12: gateway.GetUsersRequest
-	(*GetUsersResponse)(nil),         // 13: gateway.GetUsersResponse
-	(*UpdateUserRequest)(nil),        // 14: gateway.UpdateUserRequest
-	(*UpdateCurrentUserRequest)(nil), // 15: gateway.UpdateCurrentUserRequest
-	(*DeleteUserRequest)(nil),        // 16: gateway.DeleteUserRequest
-	(*RefreshResponse)(nil),          // 17: gateway.RefreshResponse
-	(*account.User)(nil),             // 18: account.User
-	(*auth.TokenPair)(nil),           // 19: auth.TokenPair
-	(*account.CreateUser)(nil),       // 20: account.CreateUser
-	(*pagination.Pagination)(nil),    // 21: pagination.Pagination
-	(*emptypb.Empty)(nil),            // 22: google.protobuf.Empty
+	(*RegisterRequest)(nil),                // 0: gateway.RegisterRequest
+	(*RegisterResponse)(nil),               // 1: gateway.RegisterResponse
+	(*LoginRequest)(nil),                   // 2: gateway.LoginRequest
+	(*LoginResponse)(nil),                  // 3: gateway.LoginResponse
+	(*RefreshRequest)(nil),                 // 4: gateway.RefreshRequest
+	(*LogoutRequest)(nil),                  // 5: gateway.LogoutRequest
+	(*ValidateTokenRequest)(nil),           // 6: gateway.ValidateTokenRequest
+	(*ValidateTokenResponse)(nil),          // 7: gateway.ValidateTokenResponse
+	(*CreateUserRequest)(nil),              // 8: gateway.CreateUserRequest
+	(*GetUserRequest)(nil),                 // 9: gateway.GetUserRequest
+	(*GetUserResponse)(nil),                // 10: gateway.GetUserResponse
+	(*GetCurrentUserResponse)(nil),         // 11: gateway.GetCurrentUserResponse
+	(*GetUsersRequest)(nil),                // 12: gateway.GetUsersRequest
+	(*GetUsersResponse)(nil),               // 13: gateway.GetUsersResponse
+	(*UpdateUserRequest)(nil),              // 14: gateway.UpdateUserRequest
+	(*UpdateCurrentUserRequest)(nil),       // 15: gateway.UpdateCurrentUserRequest
+	(*DeleteUserRequest)(nil),              // 16: gateway.DeleteUserRequest
+	(*RefreshResponse)(nil),                // 17: gateway.RefreshResponse
+	(*DepositRequest)(nil),                 // 18: gateway.DepositRequest
+	(*WithdrawRequest)(nil),                // 19: gateway.WithdrawRequest
+	(*TransferRequest)(nil),                // 20: gateway.TransferRequest
+	(*GetTransactionsRequest)(nil),         // 21: gateway.GetTransactionsRequest
+	(*GetTransactionsResponse)(nil),        // 22: gateway.GetTransactionsResponse
+	(*account.User)(nil),                   // 23: account.User
+	(*auth.TokenPair)(nil),                 // 24: auth.TokenPair
+	(*account.CreateUser)(nil),             // 25: account.CreateUser
+	(*pagination.Pagination)(nil),          // 26: pagination.Pagination
+	(*timestamppb.Timestamp)(nil),          // 27: google.protobuf.Timestamp
+	(*transaction.TransactionDetails)(nil), // 28: transaction.TransactionDetails
+	(*emptypb.Empty)(nil),                  // 29: google.protobuf.Empty
 }
 var file_gateway_gateway_service_proto_depIdxs = []int32{
-	18, // 0: gateway.RegisterRequest.user:type_name -> account.User
-	18, // 1: gateway.RegisterResponse.user:type_name -> account.User
-	19, // 2: gateway.RegisterResponse.tokens:type_name -> auth.TokenPair
-	18, // 3: gateway.LoginResponse.user:type_name -> account.User
-	19, // 4: gateway.LoginResponse.tokens:type_name -> auth.TokenPair
-	20, // 5: gateway.CreateUserRequest.user:type_name -> account.CreateUser
-	18, // 6: gateway.GetUserResponse.user:type_name -> account.User
-	18, // 7: gateway.GetCurrentUserResponse.user:type_name -> account.User
-	21, // 8: gateway.GetUsersRequest.pagination:type_name -> pagination.Pagination
-	18, // 9: gateway.GetUsersResponse.users:type_name -> account.User
-	21, // 10: gateway.GetUsersResponse.pagination:type_name -> pagination.Pagination
-	18, // 11: gateway.UpdateUserRequest.user:type_name -> account.User
-	18, // 12: gateway.UpdateCurrentUserRequest.user:type_name -> account.User
-	19, // 13: gateway.RefreshResponse.token_pair:type_name -> auth.TokenPair
-	0,  // 14: gateway.Gateway.Register:input_type -> gateway.RegisterRequest
-	2,  // 15: gateway.Gateway.Login:input_type -> gateway.LoginRequest
-	5,  // 16: gateway.Gateway.Logout:input_type -> gateway.LogoutRequest
-	6,  // 17: gateway.Gateway.ValidateToken:input_type -> gateway.ValidateTokenRequest
-	8,  // 18: gateway.Gateway.CreateUser:input_type -> gateway.CreateUserRequest
-	9,  // 19: gateway.Gateway.GetUser:input_type -> gateway.GetUserRequest
-	22, // 20: gateway.Gateway.getCurrentUser:input_type -> google.protobuf.Empty
-	12, // 21: gateway.Gateway.getUsers:input_type -> gateway.GetUsersRequest
-	14, // 22: gateway.Gateway.UpdateUser:input_type -> gateway.UpdateUserRequest
-	15, // 23: gateway.Gateway.UpdateCurrentUser:input_type -> gateway.UpdateCurrentUserRequest
-	16, // 24: gateway.Gateway.DeleteUser:input_type -> gateway.DeleteUserRequest
-	1,  // 25: gateway.Gateway.Register:output_type -> gateway.RegisterResponse
-	17, // 26: gateway.Gateway.Login:output_type -> gateway.RefreshResponse
-	22, // 27: gateway.Gateway.Logout:output_type -> google.protobuf.Empty
-	7,  // 28: gateway.Gateway.ValidateToken:output_type -> gateway.ValidateTokenResponse
-	22, // 29: gateway.Gateway.CreateUser:output_type -> google.protobuf.Empty
-	10, // 30: gateway.Gateway.GetUser:output_type -> gateway.GetUserResponse
-	11, // 31: gateway.Gateway.getCurrentUser:output_type -> gateway.GetCurrentUserResponse
-	13, // 32: gateway.Gateway.getUsers:output_type -> gateway.GetUsersResponse
-	22, // 33: gateway.Gateway.UpdateUser:output_type -> google.protobuf.Empty
-	22, // 34: gateway.Gateway.UpdateCurrentUser:output_type -> google.protobuf.Empty
-	22, // 35: gateway.Gateway.DeleteUser:output_type -> google.protobuf.Empty
-	25, // [25:36] is the sub-list for method output_type
-	14, // [14:25] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	23, // 0: gateway.RegisterRequest.user:type_name -> account.User
+	23, // 1: gateway.RegisterResponse.user:type_name -> account.User
+	24, // 2: gateway.RegisterResponse.tokens:type_name -> auth.TokenPair
+	23, // 3: gateway.LoginResponse.user:type_name -> account.User
+	24, // 4: gateway.LoginResponse.tokens:type_name -> auth.TokenPair
+	25, // 5: gateway.CreateUserRequest.user:type_name -> account.CreateUser
+	23, // 6: gateway.GetUserResponse.user:type_name -> account.User
+	23, // 7: gateway.GetCurrentUserResponse.user:type_name -> account.User
+	26, // 8: gateway.GetUsersRequest.pagination:type_name -> pagination.Pagination
+	23, // 9: gateway.GetUsersResponse.users:type_name -> account.User
+	26, // 10: gateway.GetUsersResponse.pagination:type_name -> pagination.Pagination
+	23, // 11: gateway.UpdateUserRequest.user:type_name -> account.User
+	23, // 12: gateway.UpdateCurrentUserRequest.user:type_name -> account.User
+	24, // 13: gateway.RefreshResponse.token_pair:type_name -> auth.TokenPair
+	27, // 14: gateway.GetTransactionsRequest.date_from:type_name -> google.protobuf.Timestamp
+	27, // 15: gateway.GetTransactionsRequest.date_to:type_name -> google.protobuf.Timestamp
+	26, // 16: gateway.GetTransactionsRequest.pagination:type_name -> pagination.Pagination
+	28, // 17: gateway.GetTransactionsResponse.transactions:type_name -> transaction.TransactionDetails
+	0,  // 18: gateway.Gateway.Register:input_type -> gateway.RegisterRequest
+	2,  // 19: gateway.Gateway.Login:input_type -> gateway.LoginRequest
+	4,  // 20: gateway.Gateway.Refresh:input_type -> gateway.RefreshRequest
+	5,  // 21: gateway.Gateway.Logout:input_type -> gateway.LogoutRequest
+	6,  // 22: gateway.Gateway.ValidateToken:input_type -> gateway.ValidateTokenRequest
+	8,  // 23: gateway.Gateway.CreateUser:input_type -> gateway.CreateUserRequest
+	9,  // 24: gateway.Gateway.GetUser:input_type -> gateway.GetUserRequest
+	29, // 25: gateway.Gateway.getCurrentUser:input_type -> google.protobuf.Empty
+	12, // 26: gateway.Gateway.getUsers:input_type -> gateway.GetUsersRequest
+	14, // 27: gateway.Gateway.UpdateUser:input_type -> gateway.UpdateUserRequest
+	15, // 28: gateway.Gateway.UpdateCurrentUser:input_type -> gateway.UpdateCurrentUserRequest
+	16, // 29: gateway.Gateway.DeleteUser:input_type -> gateway.DeleteUserRequest
+	29, // 30: gateway.Gateway.DeleteCurrentUser:input_type -> google.protobuf.Empty
+	18, // 31: gateway.Gateway.Deposit:input_type -> gateway.DepositRequest
+	19, // 32: gateway.Gateway.Withdraw:input_type -> gateway.WithdrawRequest
+	20, // 33: gateway.Gateway.Transfer:input_type -> gateway.TransferRequest
+	21, // 34: gateway.Gateway.GetTransactions:input_type -> gateway.GetTransactionsRequest
+	1,  // 35: gateway.Gateway.Register:output_type -> gateway.RegisterResponse
+	3,  // 36: gateway.Gateway.Login:output_type -> gateway.LoginResponse
+	17, // 37: gateway.Gateway.Refresh:output_type -> gateway.RefreshResponse
+	29, // 38: gateway.Gateway.Logout:output_type -> google.protobuf.Empty
+	7,  // 39: gateway.Gateway.ValidateToken:output_type -> gateway.ValidateTokenResponse
+	29, // 40: gateway.Gateway.CreateUser:output_type -> google.protobuf.Empty
+	10, // 41: gateway.Gateway.GetUser:output_type -> gateway.GetUserResponse
+	11, // 42: gateway.Gateway.getCurrentUser:output_type -> gateway.GetCurrentUserResponse
+	13, // 43: gateway.Gateway.getUsers:output_type -> gateway.GetUsersResponse
+	29, // 44: gateway.Gateway.UpdateUser:output_type -> google.protobuf.Empty
+	29, // 45: gateway.Gateway.UpdateCurrentUser:output_type -> google.protobuf.Empty
+	29, // 46: gateway.Gateway.DeleteUser:output_type -> google.protobuf.Empty
+	29, // 47: gateway.Gateway.DeleteCurrentUser:output_type -> google.protobuf.Empty
+	29, // 48: gateway.Gateway.Deposit:output_type -> google.protobuf.Empty
+	29, // 49: gateway.Gateway.Withdraw:output_type -> google.protobuf.Empty
+	29, // 50: gateway.Gateway.Transfer:output_type -> google.protobuf.Empty
+	22, // 51: gateway.Gateway.GetTransactions:output_type -> gateway.GetTransactionsResponse
+	35, // [35:52] is the sub-list for method output_type
+	18, // [18:35] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_gateway_gateway_service_proto_init() }
@@ -1032,13 +1386,14 @@ func file_gateway_gateway_service_proto_init() {
 	if File_gateway_gateway_service_proto != nil {
 		return
 	}
+	file_gateway_gateway_service_proto_msgTypes[21].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gateway_gateway_service_proto_rawDesc), len(file_gateway_gateway_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
