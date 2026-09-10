@@ -5,7 +5,7 @@ option go_package = "github.com/go-microservices-maxfun4k/contracts/go/transacti
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
-import "transaction_model.proto";
+import "transaction/transaction_model.proto";
 import "pagination/pagination.proto";
 
 service TransactionService {
@@ -17,11 +17,11 @@ service TransactionService {
 
 message DepositRequest {
 	uint64 user_id = 1;
-	uint64 amount = 1;
+	uint64 amount = 2;
 }
 
 message WithdrawRequest {
-	uinbt64 user_id = 1;
+	uint64 user_id = 1;
 	uint64 amount = 2;
 }
 
