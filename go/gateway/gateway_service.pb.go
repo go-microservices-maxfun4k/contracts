@@ -372,7 +372,7 @@ func (x *ValidateTokenRequest) GetAccessToken() string {
 type ValidateTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	IsVapid       bool                   `protobuf:"varint,2,opt,name=is_vapid,json=isVapid,proto3" json:"is_vapid,omitempty"`
+	IsValid       bool                   `protobuf:"varint,2,opt,name=is_valid,json=isValid,proto3" json:"is_valid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -414,9 +414,9 @@ func (x *ValidateTokenResponse) GetUserId() uint64 {
 	return 0
 }
 
-func (x *ValidateTokenResponse) GetIsVapid() bool {
+func (x *ValidateTokenResponse) GetIsValid() bool {
 	if x != nil {
-		return x.IsVapid
+		return x.IsValid
 	}
 	return false
 }
@@ -1196,7 +1196,7 @@ const file_gateway_gateway_service_proto_rawDesc = "" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\"K\n" +
 	"\x15ValidateTokenResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x19\n" +
-	"\bis_vapid\x18\x02 \x01(\bR\aisVapid\"<\n" +
+	"\bis_valid\x18\x02 \x01(\bR\aisValid\"<\n" +
 	"\x11CreateUserRequest\x12'\n" +
 	"\x04user\x18\x01 \x01(\v2\x13.account.CreateUserR\x04user\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +

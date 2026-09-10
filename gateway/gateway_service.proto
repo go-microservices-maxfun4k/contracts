@@ -165,7 +165,7 @@ message ValidateTokenRequest {
 
 message ValidateTokenResponse {
 	uint64 user_id = 1;
-	bool is_vapid = 2;
+	bool is_valid = 2;
 }
 
 // Запросы для управления пользователями
