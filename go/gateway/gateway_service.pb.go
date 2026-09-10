@@ -186,7 +186,7 @@ func (x *LoginRequest) GetPassword() string {
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          *account.User          `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	Token         *auth.TokenPair        `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	Tokens        *auth.TokenPair        `protobuf:"bytes,2,opt,name=tokens,proto3" json:"tokens,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -228,9 +228,9 @@ func (x *LoginResponse) GetUser() *account.User {
 	return nil
 }
 
-func (x *LoginResponse) GetToken() *auth.TokenPair {
+func (x *LoginResponse) GetTokens() *auth.TokenPair {
 	if x != nil {
-		return x.Token
+		return x.Tokens
 	}
 	return nil
 }
@@ -889,10 +889,10 @@ const file_gateway_gateway_service_proto_rawDesc = "" +
 	"\x06tokens\x18\x02 \x01(\v2\x0f.auth.TokenPairR\x06tokens\"P\n" +
 	"\fLoginRequest\x12$\n" +
 	"\x0elogin_or_email\x18\x01 \x01(\tR\floginOrEmail\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"Y\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"[\n" +
 	"\rLoginResponse\x12!\n" +
-	"\x04user\x18\x01 \x01(\v2\r.account.UserR\x04user\x12%\n" +
-	"\x05token\x18\x02 \x01(\v2\x0f.auth.TokenPairR\x05token\"5\n" +
+	"\x04user\x18\x01 \x01(\v2\r.account.UserR\x04user\x12'\n" +
+	"\x06tokens\x18\x02 \x01(\v2\x0f.auth.TokenPairR\x06tokens\"5\n" +
 	"\x0eRefreshRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"4\n" +
 	"\rLogoutRequest\x12#\n" +
@@ -988,7 +988,7 @@ var file_gateway_gateway_service_proto_depIdxs = []int32{
 	18, // 1: gateway.RegisterResponse.user:type_name -> account.User
 	19, // 2: gateway.RegisterResponse.tokens:type_name -> auth.TokenPair
 	18, // 3: gateway.LoginResponse.user:type_name -> account.User
-	19, // 4: gateway.LoginResponse.token:type_name -> auth.TokenPair
+	19, // 4: gateway.LoginResponse.tokens:type_name -> auth.TokenPair
 	20, // 5: gateway.CreateUserRequest.user:type_name -> account.CreateUser
 	18, // 6: gateway.GetUserResponse.user:type_name -> account.User
 	18, // 7: gateway.GetCurrentUserResponse.user:type_name -> account.User
