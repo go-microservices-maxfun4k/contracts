@@ -31,7 +31,7 @@ type CreateUser struct {
 	MiddleName    string                 `protobuf:"bytes,5,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
 	Email         string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
 	Age           uint32                 `protobuf:"varint,7,opt,name=age,proto3" json:"age,omitempty"`
-	Balance       string                 `protobuf:"bytes,8,opt,name=balance,proto3" json:"balance,omitempty"`
+	Balance       float32                `protobuf:"fixed32,8,opt,name=balance,proto3" json:"balance,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -115,11 +115,11 @@ func (x *CreateUser) GetAge() uint32 {
 	return 0
 }
 
-func (x *CreateUser) GetBalance() string {
+func (x *CreateUser) GetBalance() float32 {
 	if x != nil {
 		return x.Balance
 	}
-	return ""
+	return 0
 }
 
 type User struct {
@@ -270,7 +270,7 @@ const file_account_account_model_proto_rawDesc = "" +
 	"middleName\x12\x14\n" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12\x10\n" +
 	"\x03age\x18\a \x01(\rR\x03age\x12\x18\n" +
-	"\abalance\x18\b \x01(\tR\abalance\"\xf6\x02\n" +
+	"\abalance\x18\b \x01(\x02R\abalance\"\xf6\x02\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05login\x18\x02 \x01(\tR\x05login\x12\x14\n" +
